@@ -149,52 +149,51 @@
   <p>今日も元気に働いてます👇</p>
 </header>
 
-<div class="summary" id="summary"></div>
+<!--
+  ▼データの更新方法
+  下の .card ブロックをコピー＆編集して、増やしたり書き換えたりしてください。
+  status クラスは「status-稼働中」「status-完了」「status-要確認」の3種類、
+  バッジの文字とアイコンも合わせて変更してください。
+-->
 
-<div class="grid" id="grid"></div>
+<div class="summary">
+  <span>🔵 稼働中 1件</span>
+  <span>✅ 完了 1件</span>
+  <span>🟠 要確認 1件</span>
+</div>
 
-<footer>最終更新はデータを手動で編集してください（このファイル内の skills 配列）</footer>
+<div class="grid">
 
-<script>
-  // ここを編集すればダッシュボードの内容が更新されます
-  const skills = [
-    { name: "提案書ドラフト担当", status: "完了", lastRun: "2026-07-20 09:00" },
-    { name: "請求書チェック担当", status: "稼働中", lastRun: "2026-07-20 10:15" },
-    { name: "競合リサーチ担当", status: "要確認", lastRun: "2026-07-19 18:40" }
-  ];
+  <div class="card status-完了">
+    <div class="card-top">
+      <span class="card-icon">🧑‍💻</span>
+      <span class="card-name">提案書ドラフト担当</span>
+    </div>
+    <div class="badge status-完了">✅ 完了</div>
+    <div class="last-run">🕒 最終実行: 2026-07-20 09:00</div>
+  </div>
 
-  const statusIcon = {
-    "稼働中": "🔵",
-    "完了": "✅",
-    "要確認": "🟠"
-  };
+  <div class="card status-稼働中">
+    <div class="card-top">
+      <span class="card-icon">🧑‍💻</span>
+      <span class="card-name">請求書チェック担当</span>
+    </div>
+    <div class="badge status-稼働中">🔵 稼働中</div>
+    <div class="last-run">🕒 最終実行: 2026-07-20 10:15</div>
+  </div>
 
-  const grid = document.getElementById("grid");
-  skills.forEach(skill => {
-    const card = document.createElement("div");
-    card.className = `card status-${skill.status}`;
-    card.innerHTML = `
-      <div class="card-top">
-        <span class="card-icon">🧑‍💻</span>
-        <span class="card-name">${skill.name}</span>
-      </div>
-      <div class="badge status-${skill.status}">${statusIcon[skill.status]} ${skill.status}</div>
-      <div class="last-run">🕒 最終実行: ${skill.lastRun}</div>
-    `;
-    grid.appendChild(card);
-  });
+  <div class="card status-要確認">
+    <div class="card-top">
+      <span class="card-icon">🧑‍💻</span>
+      <span class="card-name">競合リサーチ担当</span>
+    </div>
+    <div class="badge status-要確認">🟠 要確認</div>
+    <div class="last-run">🕒 最終実行: 2026-07-19 18:40</div>
+  </div>
 
-  const summary = document.getElementById("summary");
-  const counts = skills.reduce((acc, s) => {
-    acc[s.status] = (acc[s.status] || 0) + 1;
-    return acc;
-  }, {});
-  Object.entries(counts).forEach(([status, count]) => {
-    const span = document.createElement("span");
-    span.textContent = `${statusIcon[status]} ${status} ${count}件`;
-    summary.appendChild(span);
-  });
-</script>
+</div>
+
+<footer>最終更新はこのファイル内の .card ブロックを直接編集してください</footer>
 
 </body>
 </html>
